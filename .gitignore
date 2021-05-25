@@ -3,3 +3,7 @@
 Library/
 Assembly-CSharp.csproj
 qsharp-unity.sln
+host/bin/
+host/obj/
+quantum/bin/
+quantum/obj/
