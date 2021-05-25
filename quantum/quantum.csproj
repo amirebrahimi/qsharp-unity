@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.Quantum.Sdk/0.12.20092803">
+
+<!--Project Sdk="Microsoft.NET.Sdk">-->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <CsharpGeneration>false</CsharpGeneration>
+	  <IncludeQsharpCorePackages>false</IncludeQsharpCorePackages>
+  </PropertyGroup>
+
+<Target Name="BeforeCsharpCompile">
+	<ItemGroup>
+		<Compile Include="$(GeneratedFilesOutputPath)**/*.g.cs" Exclude="@(Compile)" AutoGen="true" />
+	</ItemGroup>
+</Target>
+
+<ItemGroup>
+  <ProjectReference Include="..\..\qsharp-runtime\src\Simulation\CsharpGeneration\Microsoft.Quantum.CsharpGeneration.fsproj" PrivateAssets="All" IsQscReference="true"/>
+</ItemGroup>
+
+
+	<ItemGroup>
+    <Reference Include="Microsoft.Quantum.QsCore">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.QsCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.QSharp.Core">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.QSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.Runtime.Core">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.Runtime.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.Simulation.Common">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.Simulation.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.Simulation.QCTraceSimulatorRuntime">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.Simulation.QCTraceSimulatorRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.Simulators">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.Simulators.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Quantum.Standard">
+      <HintPath>..\quantumsdk-netstandard20\Microsoft.Quantum.Standard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
