@@ -26,7 +26,6 @@ public class Test : MonoBehaviour
     {
         UnitySystemConsoleRedirector.Redirect();
 
-        var simulator = new QuantumSimulator();
         var bits = new[] { false, true, false };
         using (var sim = new QuantumSimulator())
         {
