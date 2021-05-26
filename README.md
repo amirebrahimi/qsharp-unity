@@ -4,9 +4,9 @@
 
 Someone mentioned at a QC meetup that it would be cool to see Q# and Unity work together. So, I figured it was worth a quick-and-dirty prototype. I did this work back in October 2020 and never released it because it doesn't have a sustainable workflow (more on that later). After someone tagged me in a tweet I figured it would be worth re-visiting:
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Hello <a href="https://twitter.com/amir_e?ref_src=twsrc%5Etfw">@amir_e</a>!<br>Would you happend to have any insight about &quot;How could you use Q# within Unity?&quot; <br>➡️ <a href="https://t.co/mmE3yB7Ix3">https://t.co/mmE3yB7Ix3</a></p>&mdash; LittleCoinCoin (@LittleCoinCoin1) <a href="https://twitter.com/LittleCoinCoin1/status/1369245892168085517?ref_src=twsrc%5Etfw">March 9, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Hello <a href="https://twitter.com/amir_e?ref_src=twsrc%5Etfw">@amir_e</a>!<br>Would you happend to have any insight about &quot;How could you use Q# within Unity?&quot; <br>➡️ <a href="https://t.co/mmE3yB7Ix3">https://t.co/mmE3yB7Ix3</a></p>&mdash; LittleCoinCoin (@LittleCoinCoin1) <a href="https://twitter.com/LittleCoinCoin1/status/1369245892168085517?ref_src=twsrc%5Etfw">March 9, 2021</a></blockquote>
 
-Even then, I'm just getting to it now, unfortunately. So, included in this repo is a Unity project that will allow you to write some code like this:
+Even then, I just finally got around to getting everything pushed to github. So, included in this repo is a Unity project that will allow you to write some code like this:
 
 ```csharp
 public class Test : MonoBehaviour
@@ -47,18 +47,18 @@ For the above, I think the easiest thing to do is open up the `quantum-dotnet.sl
 
 > `dotnet restore quantum-dotnet.sln`
 
-I think this downloads missing dependencies, but I'm not entirely sure. Unfortunately, I still got an error with trying to build after copying this across machines and a fresh install of Windows:
+I think this downloads missing dependencies, but I'm not entirely sure. Unfortunately, I still got an error with trying to build this again after the time that has passed (I'm on a new machine with a fresh install of Windows):
 
 ```
 Error	QS7016	Unable to load the file "C:\...\qsharp-runtime\src\Simulation\CsharpGeneration\bin\Debug\netstandard2.0\Microsoft.Quantum.CsharpGeneration.dll" specifying transformations to perform as part of the compilation process. Unable to load one or more of the requested types.
 ```
 
-Perhaps you won't get this error, but I don't have any interest in investigating further. The workflow is not sustainable because it required the following:
+Perhaps you won't get this error, but I don't have any interest in investigating further for the following reasons:
 
-1. A custom fork of `qsharp-compiler` and `qsharp-runtime` in order to compile under netstandard2.0. Unity unfortunately [didn't support netstandard2.1 yet](https://github.com/dotnet/standard/issues/1330) (at the time I did this work) and it [wasn't clear yet on when it would be supported](https://forum.unity.com/threads/net-standard-2-1.757007/). This was not an easy feat to get it to compile and I have no interest in maintaining a fork of those two projects.
+1. A custom fork of `qsharp-compiler` and `qsharp-runtime` were required in order to compile under netstandard2.0. Unity unfortunately [didn't support netstandard2.1 yet](https://github.com/dotnet/standard/issues/1330) (at the time I did this work) and it [wasn't clear yet on when it would be supported](https://forum.unity.com/threads/net-standard-2-1.757007/). This was not an easy feat to get it to compile and I have no interest in maintaining a fork of those two projects.
 2. So much of the pipeline between `qsharp-compiler` and `qsharp-runtime` relies on them working in tandem, so I had to manually compile .qs files in order to complete the build process for those custom forks.
 3. Generated files require a manual copy into Unity along with their dependencies.
 
-This brings me to my final point -- **I'm not going to support any of this because it is just too much work for a single person**. You'll notice that I've removed the Issues feature from GitHub and will archive the repository (as read-only) after committing everything. My guess is that something will break along the way for you to try and re-trace my steps. I simply figured I'd provide this to those of you who are interested about integration and looking for a jumping-off point.
+This brings me to my final point -- **I'm not going to support any of this because it is just too much work for a single person**. You'll notice that I've removed the Issues feature from GitHub and will archive the repository (as read-only) after committing everything. My guess is that something will break along the way if you are trying to re-trace my steps. I simply figured I'd provide this to those of you who are interested about integration and looking for a jumping-off point.
 
 The good news is that as I write this up and look back at the netstandard2.1 issue I mentioned above I see that Unity is [just now releasing experimental support in 2021.2.0a8](https://forum.unity.com/threads/unity-future-net-development-status.1092205/). Perhaps give that a shot and see if you have better luck with getting Q# programs into Unity. Maybe some of what I have shared here can help.
